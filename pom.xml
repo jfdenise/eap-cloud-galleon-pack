@@ -48,6 +48,14 @@
         <version.org.wildfly.core>19.0.0.Beta-redhat-20220823</version.org.wildfly.core>
         <version.org.wildfly.galleon-plugins>6.0.0.Alpha7</version.org.wildfly.galleon-plugins>
         <version.org.jboss.eap.maven.plugin>1.0.0.Beta3-redhat-00001</version.org.jboss.eap.maven.plugin>
+        
+        <!-- channels properties -->
+        <feature-pack.artifactId>eap-cloud-galleon-pack</feature-pack.artifactId>
+        <channel.schema>1.0.0</channel.schema>
+        <channel.name>Channel for EAP 8 Beta cloud feature-pack.</channel.name>
+        <channel.description>${channel.name}</channel.description>
+        <eap.channel.groupId>org.jboss.eap.channels</eap.channel.groupId>
+        <eap.channel.artifactId>eap-8.0-beta</eap.channel.artifactId>
     </properties>
 
     <dependencyManagement>
@@ -118,5 +126,6 @@
     <modules>
         <module>testsuite</module>
         <module>eap-cloud-galleon-pack</module>
+        <module>channel</module>
     </modules>
 </project>
