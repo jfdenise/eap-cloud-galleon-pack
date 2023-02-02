@@ -44,16 +44,16 @@
         <wildfly.cekit.modules.tag>main</wildfly.cekit.modules.tag>
         <version.junit>4.13.2</version.junit>
         <version.inject>1</version.inject>
-        <version.org.jboss.eap>8.0.0.Beta-redhat-00003</version.org.jboss.eap>
-        <version.org.wildfly.core>19.0.0.Beta16-redhat-00004</version.org.wildfly.core>
-        <version.org.wildfly.galleon-plugins>6.2.0.Final-redhat-00001</version.org.wildfly.galleon-plugins>
+        <version.org.jboss.eap>28.0.0.Beta1-SNAPSHOT</version.org.jboss.eap>
+        <version.org.wildfly.core>20.0.0.Beta5</version.org.wildfly.core>
+        <version.org.wildfly.galleon-plugins>6.2.0.Final</version.org.wildfly.galleon-plugins>
         <version.org.jboss.eap.maven.plugin>1.0.0.Beta5-redhat-00001</version.org.jboss.eap.maven.plugin>
     </properties>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>org.jboss.eap</groupId>
+                <groupId>org.wildfly</groupId>
                 <artifactId>wildfly-ee-galleon-pack</artifactId>
                 <version>${version.org.jboss.eap}</version>
                 <type>zip</type>
