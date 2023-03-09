@@ -28,14 +28,6 @@
     <name>Galleon feature-pack for EAP 8 on the Cloud</name>
   
     <description>Galleon feature-pack for EAP 8 on the Cloud</description>
-    
-    <dependencies>
-        <dependency>
-            <groupId>org.jboss.eap</groupId>
-            <artifactId>wildfly-ee-galleon-pack</artifactId>
-            <type>zip</type>
-        </dependency>
-    </dependencies>
 
     <properties>
         <common.resources.directory>${basedir}/../common/target/resources</common.resources.directory>
@@ -94,6 +86,12 @@
                         </goals>
                         <phase>compile</phase>
                         <configuration>
+                            <channel-manifests>
+                                <manifest>
+                                    <groupId>org.jboss.eap.channels</groupId>
+                                    <artifactId>eap-8.0</artifactId>
+                                </manifest>
+                            </channel-manifests>
                             <generate-channel>true</generate-channel>
                             <add-feature-packs-as-required-channels>false</add-feature-packs-as-required-channels>
                         </configuration>
