@@ -35,6 +35,12 @@
             <artifactId>wildfly-ee-galleon-pack</artifactId>
             <type>zip</type>
         </dependency>
+        <dependency>
+          <groupId>org.wildfly.cloud</groupId>
+          <artifactId>wildfly-bootable-cloud-runtime</artifactId>
+          <version>${verion.org.wildfly.cloud}</version>
+          <type>jar</type>
+        </dependency>
     </dependencies>
 
     <properties>

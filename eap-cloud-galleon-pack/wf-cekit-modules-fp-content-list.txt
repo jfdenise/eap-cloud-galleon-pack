@@ -1,3 +1,4 @@
+bootable-runtime
 finalize-script
 launch-common
 launch-openshift

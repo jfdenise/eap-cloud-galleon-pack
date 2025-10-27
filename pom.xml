@@ -40,14 +40,15 @@
     </licenses>
     
     <properties>
-        <wildfly.cekit.modules.fork>wildfly</wildfly.cekit.modules.fork>
-        <wildfly.cekit.modules.tag>0.35.1</wildfly.cekit.modules.tag>
+        <wildfly.cekit.modules.fork>jfdenise</wildfly.cekit.modules.fork>
+        <wildfly.cekit.modules.tag>bootable-in-cloud-fp</wildfly.cekit.modules.tag>
         <version.junit>4.13.2</version.junit>
         <version.inject>1</version.inject>
         <version.org.jboss.eap>8.1.0.GA-redhat-00001</version.org.jboss.eap>
         <version.org.wildfly.core>27.1.0.Final-redhat-00001</version.org.wildfly.core>
-        <version.org.wildfly.galleon-plugins>7.3.1.Final</version.org.wildfly.galleon-plugins>
+        <version.org.wildfly.galleon-plugins>8.0.2.Final</version.org.wildfly.galleon-plugins>
         <version.org.jboss.eap.maven.plugin>2.0.0.Final-redhat-00001</version.org.jboss.eap.maven.plugin>
+        <verion.org.wildfly.cloud>8.1.1.Final-SNAPSHOT</verion.org.wildfly.cloud>
     </properties>
 
     <dependencyManagement>
@@ -63,6 +64,18 @@
                         <artifactId>*</artifactId>
                     </exclusion>
                 </exclusions>
+            </dependency>
+            <dependency>
+              <groupId>org.wildfly.cloud</groupId>
+              <artifactId>wildfly-bootable-cloud-runtime</artifactId>
+              <version>${verion.org.wildfly.cloud}</version>
+              <type>jar</type>
+              <exclusions>
+                <exclusion>
+                  <groupId>*</groupId>
+                  <artifactId>*</artifactId>
+                </exclusion>
+              </exclusions>
             </dependency>
             <!-- tests -->
             <dependency>
