@@ -35,6 +35,16 @@
             <artifactId>wildfly-ee-galleon-pack</artifactId>
             <type>zip</type>
         </dependency>
+        <dependency>
+          <groupId>org.jboss.eap.cloud</groupId>
+          <artifactId>eap-bootable-cloud-configurator</artifactId>
+          <exclusions>
+            <exclusion>
+              <groupId>*</groupId>
+              <artifactId>*</artifactId>
+            </exclusion>
+          </exclusions>
+        </dependency>
     </dependencies>
 
     <properties>

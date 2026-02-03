@@ -40,8 +40,8 @@
     </licenses>
     
     <properties>
-        <wildfly.cekit.modules.fork>wildfly</wildfly.cekit.modules.fork>
-        <wildfly.cekit.modules.tag>0.39.1.1</wildfly.cekit.modules.tag>
+        <wildfly.cekit.modules.fork>jfdenise</wildfly.cekit.modules.fork>
+        <wildfly.cekit.modules.tag>bootable-in-cloud-fp</wildfly.cekit.modules.tag>
         <version.junit>4.13.2</version.junit>
         <version.inject>1</version.inject>
         <version.org.jboss.eap>8.2.0.Alpha-redhat-00005</version.org.jboss.eap>
@@ -63,6 +63,16 @@
                         <artifactId>*</artifactId>
                     </exclusion>
                 </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.eap.cloud</groupId>
+                <artifactId>eap-bootable-cloud-configurator</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+              <groupId>org.wildfly.core</groupId>
+              <artifactId>wildfly-jar-runtime</artifactId>
+              <version>${version.org.wildfly.core}</version>
             </dependency>
             <!-- tests -->
             <dependency>
@@ -129,5 +139,6 @@
     <modules>
         <module>testsuite</module>
         <module>eap-cloud-galleon-pack</module>
+        <module>eap-bootable-cloud-configurator</module>
     </modules>
 </project>
