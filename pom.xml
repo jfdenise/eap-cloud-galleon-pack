@@ -65,9 +65,15 @@
                 </exclusions>
             </dependency>
             <dependency>
-                <groupId>org.jboss.eap.cloud</groupId>
+                <groupId>${project.groupId}</groupId>
                 <artifactId>eap-bootable-cloud-configurator</artifactId>
                 <version>${project.version}</version>
+            </dependency>
+            <dependency>
+              <groupId>${project.groupId}</groupId>
+              <artifactId>eap-cloud-galleon-pack-shared</artifactId>
+              <version>${project.version}</version>
+              <type>pom</type>
             </dependency>
             <dependency>
               <groupId>org.wildfly.core</groupId>
@@ -138,6 +144,7 @@
 
     <modules>
         <module>testsuite</module>
+        <module>galleon-shared</module>
         <module>eap-cloud-galleon-pack</module>
         <module>eap-bootable-cloud-configurator</module>
     </modules>

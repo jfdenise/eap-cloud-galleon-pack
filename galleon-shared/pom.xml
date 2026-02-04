@@ -23,26 +23,15 @@
         <artifactId>eap-cloud-galleon-pack-parent</artifactId>
         <version>3.0.0.Beta-redhat-SNAPSHOT</version>
     </parent>
-    <artifactId>eap-cloud-galleon-pack</artifactId>
+    <artifactId>eap-cloud-galleon-pack-shared</artifactId>
     <packaging>pom</packaging>
-    <name>Galleon feature-pack for EAP 8 on the Cloud</name>
+    <name>Galleon feature-pack for EAP 8 on the Cloud shared content</name>
   
-    <description>Galleon feature-pack for EAP 8 on the Cloud</description>
+    <description>Galleon feature-pack for EAP 8 on the Cloud shared content</description>
     
     <dependencies>
         <dependency>
-            <groupId>org.jboss.eap</groupId>
-            <artifactId>wildfly-ee-galleon-pack</artifactId>
-            <type>zip</type>
-            <exclusions>
-            <exclusion>
-              <groupId>*</groupId>
-              <artifactId>*</artifactId>
-            </exclusion>
-          </exclusions>
-        </dependency>
-        <dependency>
-          <groupId>${project.groupId}</groupId>
+          <groupId>org.jboss.eap.cloud</groupId>
           <artifactId>eap-bootable-cloud-configurator</artifactId>
           <exclusions>
             <exclusion>
@@ -51,35 +40,46 @@
             </exclusion>
           </exclusions>
         </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>eap-cloud-galleon-pack-shared</artifactId>
-            <type>pom</type>
-            <scope>provided</scope>
-        </dependency>
     </dependencies>
 
-    <properties>
-        <common.resources.directory>${basedir}/../galleon-shared/target/resources</common.resources.directory>
-    </properties>
     <build>                
         <plugins>
-            
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>generate-sources</phase>
+                        <configuration>
+                            <tasks>
+                                <exec executable="./install-wildfly-cekit-modules.sh" failonerror="true">
+                                    <env key="WILDFLY_CEKIT_TAG" value="${wildfly.cekit.modules.tag}"/>
+                                    <env key="WILDFLY_CEKIT_FORK" value="${wildfly.cekit.modules.fork}"/>
+                                </exec>
+                            </tasks>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
                 <executions>
                     <execution>
-                        <id>copy-common-feature-pack-resources</id>
+                        <id>copy-resources</id>
                         <phase>process-resources</phase>
                         <goals>
                             <goal>copy-resources</goal>
                         </goals>
                         <configuration>
+                            <overwrite>true</overwrite>
                             <outputDirectory>${basedir}/target/resources</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>${common.resources.directory}</directory>
+                                    <directory>${basedir}/src/main/resources</directory>
                                 </resource>
                             </resources>
                         </configuration>
@@ -87,19 +87,25 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>org.wildfly.galleon-plugins</groupId>
-                <artifactId>wildfly-galleon-maven-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
                 <executions>
                     <execution>
-                        <id>eap-cloud-galleon-pack-build</id>
+                        <id>assemble</id>
+                        <phase>package</phase>
                         <goals>
-                            <goal>build-feature-pack</goal>
+                            <goal>single</goal>
                         </goals>
-                        <phase>compile</phase>
                         <configuration>
-                            <wildfly-channel-resolution-mode>REQUIRED</wildfly-channel-resolution-mode>
-                            <generate-channel-manifest>true</generate-channel-manifest>
-                            <add-feature-packs-as-required-manifests>false</add-feature-packs-as-required-manifests>
+                            <descriptors>
+                                <descriptor>assembly.xml</descriptor>
+                            </descriptors>
+                            <recompressZippedFiles>true</recompressZippedFiles>
+                            <finalName>${project.build.finalName}</finalName>
+                            <appendAssemblyId>false</appendAssemblyId>
+                            <outputDirectory>${project.build.directory}</outputDirectory>
+                            <workDirectory>${project.build.directory}/assembly/work</workDirectory>
+                            <tarLongFileMode>${assembly.tarLongFileMode}</tarLongFileMode>
                         </configuration>
                     </execution>
                 </executions>
