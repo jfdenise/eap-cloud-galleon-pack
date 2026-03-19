@@ -40,8 +40,8 @@
     </licenses>
     
     <properties>
-        <wildfly.cekit.modules.fork>jfdenise</wildfly.cekit.modules.fork>
-        <wildfly.cekit.modules.tag>bootable-in-cloud-fp</wildfly.cekit.modules.tag>
+        <wildfly.cekit.modules.fork>wildfly</wildfly.cekit.modules.fork>
+        <wildfly.cekit.modules.tag>wildfly-cloud-9.1.0.Final</wildfly.cekit.modules.tag>
         <version.junit>4.13.2</version.junit>
         <version.inject>1</version.inject>
         <version.org.jboss.eap>8.2.0.Alpha-redhat-00005</version.org.jboss.eap>
