@@ -27,7 +27,7 @@ public class CloudConfigurator implements BootableServerConfigurator {
     private static final Path TMP_DIR = Paths.get("/tmp");
     private static final Path JBOSS_CONTAINER_BOOTABLE_DIR = TMP_DIR.resolve("wildfly-bootable-jar");
     private static final Path INSTALL_DIR_FILE = JBOSS_CONTAINER_BOOTABLE_DIR.resolve("install-dir");
-
+    private static final String INET_ADDRESS_OP_CMD = ":write-attribute(name=inet-address,value=${jboss.bind.address,env.HOSTNAME:127.0.0.1})";
     @Override
     public Configuration configure(List<String> args, Path installDir) throws Exception {
         System.out.println("Booting with the cloud configurator");
@@ -41,6 +41,9 @@ public class CloudConfigurator implements BootableServerConfigurator {
         allCmds.addAll(cmds);
         // Port offset, the cloud FP sets it to 0, required by s2i launch port-offset script.
         allCmds.add("/socket-binding-group=standard-sockets:write-attribute(name=port-offset, value=\"${jboss.socket.binding.port-offset:0}\")");
+        // Public and private addresses
+        allCmds.add("/interface=public" + INET_ADDRESS_OP_CMD);
+        allCmds.add("/interface=private" + INET_ADDRESS_OP_CMD);
         return new Configuration(extraArguments, allCmds);
     }
 
